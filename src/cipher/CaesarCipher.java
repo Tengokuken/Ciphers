@@ -9,15 +9,7 @@ import java.util.Arrays;
  *
  */
 public class CaesarCipher extends Cipher {
-  /**
-   * Input string
-   */
-  private String plainText;
-  private String encodedText;
   private int shift;
-  private static final char[] letters =
-      {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-          'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
   /**
    * Constructor for Caesar Cipher
@@ -28,8 +20,7 @@ public class CaesarCipher extends Cipher {
    */
   // TODO: Make a builder for the constructor, since it has optional params
   public CaesarCipher(String plainText, String encodedText, int shift) {
-    this.plainText = plainText;
-    this.encodedText = encodedText;
+    super(plainText, encodedText);
     this.shift = shift;
   }
 
@@ -46,7 +37,7 @@ public class CaesarCipher extends Cipher {
           convertedChar = j;
       }
       // Add <shift> to the <convertedChar> and convert it back to the
-      // corresponding letter 
+      // corresponding letter
       convertedChar = (convertedChar + this.shift) % 26;
       char encodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
@@ -68,22 +59,6 @@ public class CaesarCipher extends Cipher {
       text += encodedChar;
     }
     this.plainText = text;
-  }
-
-  public void setplainText(String plainText) {
-    this.plainText = plainText;
-  }
-
-  public void setEncodedText(String encodedText) {
-    this.encodedText = encodedText;
-  }
-
-  public String getPlainText() {
-    return this.plainText;
-  }
-
-  public String getEncodedText() {
-    return this.encodedText;
   }
 
   public void setShift(int shift) {
