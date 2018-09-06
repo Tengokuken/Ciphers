@@ -1,16 +1,22 @@
 package cipher;
 
-//TODO: Javadocs, clean up code
+/**
+ * Encode and decode strings using the Vigenere Cipher.
+ * 
+ * @author Johnson Zhong
+ *
+ */
 public class VigenereCipher extends Cipher {
-  
+
   /**
-   * Default constructor for Vigenere Cipher
+   * Default constructor.
    */
   public VigenereCipher() {
     super("", "", "", "");
   }
-  
-  public VigenereCipher(String type, String shift, String plainText, String encodedText) {
+
+  public VigenereCipher(String type, String shift, String plainText,
+      String encodedText) {
     super(type, shift, plainText, encodedText);
   }
 
@@ -72,6 +78,5 @@ public class VigenereCipher extends Cipher {
       text += encodedChar;
     }
     this.plainText = text;
-    
   }
 }

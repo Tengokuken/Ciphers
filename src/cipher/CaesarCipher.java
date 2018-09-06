@@ -1,7 +1,5 @@
 package cipher;
 
-import java.util.Arrays;
-
 /**
  * Encode and decode strings using the Caesar Cipher.
  * 
@@ -10,21 +8,22 @@ import java.util.Arrays;
  */
 public class CaesarCipher extends Cipher {
   /**
-   * Default constructor for Caesar Cipher
+   * Default constructor.
    */
   public CaesarCipher() {
-    super("", "", "", "");
+    super("", 0, "", "");
   }
 
   /**
    * Constructor for Caesar Cipher
    * 
-   * @param type        Type of ciphering
+   * @param type Type of ciphering
    * @param shift Shift value for the cipher
    * @param plainText Plaintext string
    * @param encodedText Encoded text string
    */
-  public CaesarCipher(String type, int shift, String plainText, String encodedText) {
+  public CaesarCipher(String type, int shift, String plainText,
+      String encodedText) {
     super(type, shift, plainText, encodedText);
   }
 
@@ -42,7 +41,8 @@ public class CaesarCipher extends Cipher {
       }
       // Add <shift> to the <convertedChar> and convert it back to the
       // corresponding letter
-      convertedChar = (convertedChar + Integer.parseInt((String)this.shift)) % 26;
+      convertedChar =
+          (convertedChar + Integer.parseInt((String) this.shift)) % 26;
       char encodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
       text += encodedChar;
@@ -60,9 +60,9 @@ public class CaesarCipher extends Cipher {
       for (int k = 0; k < letters.length && (convertedChar == -1); k++) {
         if (letters[k] == this.encodedText.charAt(i))
           convertedChar = k;
-      }      
+      }
       // Subtract <shift> frome the <convertedChar>
-      convertedChar = convertedChar - Integer.parseInt((String)this.shift);
+      convertedChar = convertedChar - Integer.parseInt((String) this.shift);
       // Check the sign of <convertedChar> is negative
       if (convertedChar < 0) {
         // Go backward from the end of the alphabet
@@ -75,5 +75,4 @@ public class CaesarCipher extends Cipher {
     }
     this.plainText = text;
   }
-
 }

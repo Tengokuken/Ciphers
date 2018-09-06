@@ -1,19 +1,28 @@
 package cipher;
+
 import java.util.Hashtable;
 
+/**
+ * A class that has a list of the valid ciphers.
+ * 
+ * @author Johnson Zhong
+ *
+ */
 public class CipherTable {
-  public static Hashtable<String, String> cipherTable = new 
-      Hashtable<String, String>();
+  /**
+   * Contains the names of all the possible ciphers.
+   */
+  public static Hashtable<String, String> cipherTable =
+      new Hashtable<String, String>();
 
   /**
    * Initializes the cipher table
    */
-  public static void initializeCiphers() 
-  {
+  public static void initializeCiphers() {
     cipherTable.put("caesar", "CaesarCipher");
     cipherTable.put("vigenere", "VigenereCipher");
   }
-  
+
   /**
    * Parses the user input to determine which cipher should be called.
    * 
@@ -24,23 +33,20 @@ public class CipherTable {
     // Get the class that is being called by the input
     Object cipherInstance;
     try {
-        String className = cipherTable.get(inCipher);
-        Class cipherClass = Class.forName("cipher." + className);
+      String className = cipherTable.get(inCipher);
+      Class cipherClass = Class.forName("cipher." + className);
 
-        try {
-          cipherInstance = (Object)cipherClass.newInstance();
-        } 
-        catch (InstantiationException e) {
-          return null;
-        } 
-        catch (IllegalAccessException e) {
-          return null;
-        }
-    } 
-    catch (ClassNotFoundException e) {
+      try {
+        cipherInstance = (Object) cipherClass.newInstance();
+      } catch (InstantiationException e) {
         return null;
+      } catch (IllegalAccessException e) {
+        return null;
+      }
+    } catch (ClassNotFoundException e) {
+      return null;
     }
-    
+
     // Return an instance of the class
     return cipherInstance;
   }
