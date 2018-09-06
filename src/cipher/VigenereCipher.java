@@ -64,7 +64,7 @@ public class VigenereCipher extends Cipher {
       // Check the sign of <convertedChar> is negative
       if (convertedChar < 0) {
         // Go backward from the end of the alphabet
-        convertedChar = 26 + convertedChar;
+        convertedChar = letters.length + convertedChar;
       }
       // and convert it back to a char
       char encodedChar = letters[convertedChar];
