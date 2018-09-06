@@ -2,13 +2,16 @@ package cipher;
 
 //TODO: Javadocs, clean up code
 public class VigenereCipher extends Cipher {
-
-  private String shift;
   
-  //TODO: Make a builder for the constructor, since it has optional params
-  public VigenereCipher(String plainText, String encodedText, String shift) {
-    super(plainText, encodedText);
-    this.shift = shift;
+  /**
+   * Default constructor for Vigenere Cipher
+   */
+  public VigenereCipher() {
+    super("", "", "", "");
+  }
+  
+  public VigenereCipher(String type, String shift, String plainText, String encodedText) {
+    super(type, shift, plainText, encodedText);
   }
 
   @Override
@@ -20,7 +23,7 @@ public class VigenereCipher extends Cipher {
       int shiftChar = -1;
       // Get the numerical value of the character
       for (int j = 0; j < letters.length && (shiftChar == -1); j++) {
-        if (letters[j] == this.shift.charAt(shiftLoc))
+        if (letters[j] == (((String) this.shift).charAt(shiftLoc)))
           shiftChar = j;
       }
       // Convert each letter in <input> to its integer form using <letters>
@@ -31,11 +34,9 @@ public class VigenereCipher extends Cipher {
           convertedChar = j;
       }
       convertedChar = (convertedChar + shiftChar) % 26;
-      System.out.print(convertedChar);
       char encodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
       text += encodedChar;
-      System.out.println(text);
     }
     this.encodedText = text;
   }
@@ -49,7 +50,7 @@ public class VigenereCipher extends Cipher {
       int shiftLoc = i;
       // Get the numerical value of the character
       for (int j = 0; j < letters.length && (shiftAmount == -1); j++) {
-        if (letters[j] == this.shift.charAt(shiftLoc))
+        if (letters[j] == ((String) this.shift).charAt(shiftLoc))
           shiftAmount = j;
       }
       // Convert each letter in <input> to its integer form
@@ -58,15 +59,19 @@ public class VigenereCipher extends Cipher {
         if (letters[k] == this.encodedText.charAt(i))
           convertedChar = k;
       }
-      // Subtract <shift> from the <convertedChar> and convert it back to a char
-      char encodedChar = letters[((convertedChar - shiftAmount) % 26)];
+      // Subtract <shiftAmount> frome the <convertedChar>
+      convertedChar = convertedChar - shiftAmount;
+      // Check the sign of <convertedChar> is negative
+      if (convertedChar < 0) {
+        // Go backward from the end of the alphabet
+        convertedChar = 26 + convertedChar;
+      }
+      // and convert it back to a char
+      char encodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
       text += encodedChar;
     }
     this.plainText = text;
     
-  }
-  public void setShift(String shift) {
-    this.shift = shift;
   }
 }

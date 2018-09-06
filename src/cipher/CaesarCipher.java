@@ -9,19 +9,23 @@ import java.util.Arrays;
  *
  */
 public class CaesarCipher extends Cipher {
-  private int shift;
+  /**
+   * Default constructor for Caesar Cipher
+   */
+  public CaesarCipher() {
+    super("", "", "", "");
+  }
 
   /**
    * Constructor for Caesar Cipher
    * 
+   * @param type        Type of ciphering
+   * @param shift Shift value for the cipher
    * @param plainText Plaintext string
    * @param encodedText Encoded text string
-   * @param shift Shift value for the cipher
    */
-  // TODO: Make a builder for the constructor, since it has optional params
-  public CaesarCipher(String plainText, String encodedText, int shift) {
-    super(plainText, encodedText);
-    this.shift = shift;
+  public CaesarCipher(String type, int shift, String plainText, String encodedText) {
+    super(type, shift, plainText, encodedText);
   }
 
   @Override
@@ -38,7 +42,7 @@ public class CaesarCipher extends Cipher {
       }
       // Add <shift> to the <convertedChar> and convert it back to the
       // corresponding letter
-      convertedChar = (convertedChar + this.shift) % 26;
+      convertedChar = (convertedChar + Integer.parseInt((String)this.shift)) % 26;
       char encodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
       text += encodedChar;
@@ -52,16 +56,24 @@ public class CaesarCipher extends Cipher {
     // Loop through the input string
     for (int i = 0; i < this.encodedText.length(); i++) {
       // Convert each letter in <input> to its integer form
-      int convertedChar = (int) (this.encodedText.charAt(i));
-      // Add <shift> to the <convertedChar> and convert it back to a char
-      char encodedChar = (char) ((convertedChar - this.shift) % 26);
+      int convertedChar = -1;
+      for (int k = 0; k < letters.length && (convertedChar == -1); k++) {
+        if (letters[k] == this.encodedText.charAt(i))
+          convertedChar = k;
+      }      
+      // Subtract <shift> frome the <convertedChar>
+      convertedChar = convertedChar - Integer.parseInt((String)this.shift);
+      // Check the sign of <convertedChar> is negative
+      if (convertedChar < 0) {
+        // Go backward from the end of the alphabet
+        convertedChar = 26 + convertedChar;
+      }
+      // and convert it back to a char
+      char decodedChar = letters[convertedChar];
       // Add the encoded character to a new string.
-      text += encodedChar;
+      text += decodedChar;
     }
     this.plainText = text;
   }
 
-  public void setShift(int shift) {
-    this.shift = shift;
-  }
 }
