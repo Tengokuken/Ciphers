@@ -16,7 +16,6 @@ public class CipherDriver {
    * @param args[] command line parameters
    */
   public static void main(String[] args) {
-    // TODO: error-checking
     CipherTable.initializeCiphers();
     StdIn stdIn = new StdIn();
     // Contains [cipher, type, shift, text]

@@ -1,14 +1,9 @@
 package driver;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 /**
- * Class that receives input.
+ * Class that receives input for ciphers.
  * 
  * @author Johnson Zhong
  *
@@ -23,25 +18,54 @@ public class StdIn {
   public String[] getInput() {
     // TODO: Error checking, if you get invalid fields it does weird stuff
     // Get the input from the user and store them.
-    String cipher, type, shift, text;
+    String[] cipherDetails = new String[4];
+    String input;
+    int counter = 0;
+    String text;
+    boolean validInput = true;
     Scanner in = new Scanner(System.in);
-    StdOut.displayTextOnScreen("Select your cipher: ");
-    cipher = in.nextLine().trim();
-    StdOut.displayTextOnScreen("Do you want to encode or decode: ");
-    type = in.nextLine().trim();
-    StdOut.displayTextOnScreen("How do you want to shift your input? ");
-    shift = in.nextLine().trim();
-    if (type.equals("encode")) {
-      StdOut.displayTextOnScreen("Enter your text to encode: ");
-      text = in.nextLine().trim();
-    } else if (type.equals("decode")) {
-      StdOut.displayTextOnScreen("Enter your text to decode: ");
-      text = in.nextLine().trim();
-    } else {
-      text = "";
-      // TODO: Something else
+    while(counter < 4) {
+      // Check what input we are collecting
+      switch(counter) {
+        case 0:
+          text = "Select your cipher: ";
+          break;
+        case 1:
+          text = "Do you want to encode or decode: ";
+          break;
+        case 2:
+          text = "How much do you want shift your input: ";
+          break;
+        case 3:
+          if (cipherDetails[1].equals("encode"))
+            text = "Enter your text to encode: ";
+          else if (cipherDetails[1].equals("decode"))
+            text = "Enter your text to decode: ";
+          else
+            text = "lol";
+          break;
+        default:
+          text = "Lol you shouldn't be here";
+          break;
+      }
+      // Display the text to the user
+      StdOut.displayTextOnScreen(text);
+      input = in.nextLine().trim();
+      // Check if the input is valid
+      validInput = CheckInput.validateField(input, counter);
+      if (validInput) {
+        // Collect their input and increment the counter
+        cipherDetails[counter] = input;
+        counter++;
+      } else {
+        // Return an error, make them do the thing again
+      }
     }
-    String[] input = new String[] {cipher, type, shift, text};
-    return input;
+    return cipherDetails;
+  }
+  private static class CheckInput {
+    public static boolean validateField(String input, int stage) {
+      return true;
+    }
   }
 }
