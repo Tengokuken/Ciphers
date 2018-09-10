@@ -32,12 +32,14 @@ public abstract class Cipher {
 
   /**
    * Constructor of the Cipher object.
+   * 
    * @param type        Type of ciphering done.
    * @param shift       Shift that the cipher uses.
    * @param plainText   Plaintext of the cipher.
    * @param encodedText Encoded text of the cipher.
    */
-  public Cipher(String type, Object shift, String plainText, String encodedText) {
+  public Cipher(String type, Object shift, String plainText,
+      String encodedText) {
     this.type = type;
     this.shift = shift;
     this.plainText = plainText;
@@ -53,18 +55,20 @@ public abstract class Cipher {
    * Decodes code into plaintext
    */
   public abstract void decode();
-  
+
   /**
    * Set the cipher's type.
-   * @param type    String containing the cipher's type.
+   * 
+   * @param type String containing the cipher's type.
    */
   public void setCipherType(String type) {
     this.type = type;
   }
-  
+
   /**
    * Set the shift of the cipher.
-   * @param shift   Shift used by the cipher.
+   * 
+   * @param shift Shift used by the cipher.
    */
   public void setShift(Object shift) {
     this.shift = shift;
@@ -72,7 +76,8 @@ public abstract class Cipher {
 
   /**
    * Set the plaintext string of the cipher.
-   * @param plainText   Plaintext to store.
+   * 
+   * @param plainText Plaintext to store.
    */
   public void setPlainText(String plainText) {
     this.plainText = plainText;
@@ -80,6 +85,7 @@ public abstract class Cipher {
 
   /**
    * Set the encoded string of the cipher.
+   * 
    * @param encodedText Encoded string to store.
    */
   public void setEncodedText(String encodedText) {
@@ -103,7 +109,7 @@ public abstract class Cipher {
   public String getEncodedText() {
     return this.encodedText;
   }
-  
+
   /**
    * Returns the type of ciphering that this cipher will do (encode or decode)
    * 
@@ -112,5 +118,4 @@ public abstract class Cipher {
   public String getCipherType() {
     return this.type;
   }
-
 }
