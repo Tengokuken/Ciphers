@@ -1,6 +1,7 @@
 package driver;
 
 import java.util.Scanner;
+import cipher.CipherTable;
 
 /**
  * Class that receives input for ciphers.
@@ -50,22 +51,49 @@ public class StdIn {
       }
       // Display the text to the user
       StdOut.displayTextOnScreen(text);
-      input = in.nextLine().trim();
+      cipherDetails[counter] = in.nextLine().trim();
       // Check if the input is valid
-      validInput = CheckInput.validateField(input, counter);
+      validInput = CheckInput.validateField(cipherDetails, counter);
       if (validInput) {
         // Collect their input and increment the counter
-        cipherDetails[counter] = input;
         counter++;
       } else {
         // Return an error, make them do the thing again
+        StdOut.displayTextOnScreen("Your input was invalid. Please try again.");
       }
     }
     return cipherDetails;
   }
   private static class CheckInput {
-    public static boolean validateField(String input, int stage) {
-      return true;
+    public static boolean validateField(String[] input, int stage) {
+      boolean result = true;
+      switch (stage) {
+        // Check if the cipher exists in the table of valid ciphers
+        case 0:
+          if (CipherTable.getCipher(input[stage]) == null)
+            result = false;
+          break;
+        // Check if the cipher type is valid
+        case 1:
+          if (!(input[stage].equals("encode") || input[stage].equals("Encode")
+              || input[stage].equals("decode") || input[stage].equals("Decode")))
+            result = false;
+          break;
+        // Check the shift
+        case 2:
+          // Check the cipher. Caesar ciphers use nunber based shifts,
+          // everything else uses a cipher string.
+          if (input[0].equals("caesar") || input[0].equals("Caesar")) {
+            // Check that the type contains only numbers
+            if (!(input[stage].matches("[0-9]")))
+              result = false;
+          } else {
+            // Chexk that the type contains only letters
+            if (!(input[stage].matches("[A-Za-z]")))
+              result = false;
+          }
+      }
+      return result;
     }
   }
 }

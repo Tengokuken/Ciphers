@@ -33,9 +33,9 @@ public abstract class Cipher {
   /**
    * Constructor of the Cipher object.
    * 
-   * @param type        Type of ciphering done.
-   * @param shift       Shift that the cipher uses.
-   * @param plainText   Plaintext of the cipher.
+   * @param type Type of ciphering done.
+   * @param shift Shift that the cipher uses.
+   * @param plainText Plaintext of the cipher.
    * @param encodedText Encoded text of the cipher.
    */
   public Cipher(String type, Object shift, String plainText,
