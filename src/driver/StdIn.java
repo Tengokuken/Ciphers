@@ -17,7 +17,6 @@ public class StdIn {
    * @return fileContents The contents of the text file.
    */
   public String[] getInput() {
-    // TODO: Error checking, if you get invalid fields it does weird stuff
     // Get the input from the user and store them.
     String[] cipherDetails = new String[4];
     String input;
@@ -95,7 +94,7 @@ public class StdIn {
         break;
         // Check the text.
         case 3:
-          // Check that the input consists of strictly alphabets
+          // Check that the input consists of strictly alphabets 
           if (!(input[stage].matches("[A-Za-z]+")))
             result = false;
       }
