@@ -61,8 +61,10 @@ public class CaesarCipher extends Cipher {
         if (letters[k] == this.encodedText.charAt(i))
           convertedChar = k;
       }
-      // Subtract <shift> frome the <convertedChar>
-      convertedChar = convertedChar - Integer.parseInt((String) this.shift);
+      // Subtract <shift> frome the <convertedChar> to get a number between
+      // 0 and 25 inclusive.
+      convertedChar =
+          (convertedChar - Integer.parseInt((String) this.shift)) % 26;
       // Check the sign of <convertedChar> is negative
       if (convertedChar < 0) {
         // Go backward from the end of the alphabet

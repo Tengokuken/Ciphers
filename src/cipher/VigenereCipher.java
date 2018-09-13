@@ -23,16 +23,24 @@ public class VigenereCipher extends Cipher {
   @Override
   public void encode() {
     String text = "";
+    int shiftLoc = 0;
     // Loop through the input string
     for (int i = 0; i < this.plainText.length(); i++) {
-      int shiftLoc = i;
+      // Check if the shift word reached the end of the string
+      if (shiftLoc == ((String) this.shift).length())
+        shiftLoc = 1;
+      else
+        shiftLoc++;
       int shiftChar = -1;
       // Get the numerical value of the character
       for (int j = 0; j < letters.length && (shiftChar == -1); j++) {
-        if (letters[j] == (((String) this.shift).charAt(shiftLoc)))
-          shiftChar = j;
+        if (letters[j] == (((String) this.shift).charAt(shiftLoc - 1)))
+          // The plaintext will shift this much.
+          // Add one becuase array starts counting at 0.
+          shiftChar = j + 1;
       }
-      // Convert each letter in <input> to its integer form using <letters>
+      // Convert the corresponding letter in <input> to its integer form using
+      // <letters>
       int convertedChar = -1;
       // Get the integer form of the current letter
       for (int j = 0; j < letters.length && (convertedChar == -1); j++) {

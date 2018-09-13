@@ -81,17 +81,23 @@ public class StdIn {
           break;
         // Check the shift
         case 2:
-          // Check the cipher. Caesar ciphers use nunber based shifts,
+          // Check the cipher. Caesar ciphers use nunber bastly ed shifts,
           // everything else uses a cipher string.
           if (input[0].equals("caesar") || input[0].equals("Caesar")) {
             // Check that the type contains only numbers
-            if (!(input[stage].matches("[0-9]")))
+            if (!(input[stage].matches("[0-9]+")))
               result = false;
           } else {
             // Chexk that the type contains only letters
-            if (!(input[stage].matches("[A-Za-z]")))
+            if (!(input[stage].matches("[A-Za-z]+")))
               result = false;
           }
+        break;
+        // Check the text.
+        case 3:
+          // Check that the input consists of strictly alphabets
+          if (!(input[stage].matches("[A-Za-z]+")))
+            result = false;
       }
       return result;
     }
