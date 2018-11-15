@@ -88,7 +88,7 @@ public class StdIn {
               result = false;
           } else {
             // Chexk that the type contains only letters
-            if (!(input[stage].matches("[A-Za-z]+")))
+            if (!(input[stage].matches("[A-Za-z ]+")))
               result = false;
           }
         break;

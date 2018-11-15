@@ -36,7 +36,10 @@ public class VigenereCipher extends Cipher {
         int shiftChar = -1;
         // Get the numerical value of the character
         for (int j = 0; j < letters.length && (shiftChar == -1); j++) {
-          if (letters[j] == (((String) this.shift).charAt(shiftLoc - 1)))
+          // If the current character in the shift is a space, don't shift
+          if ((((String) this.shift).charAt(shiftLoc - 1)) == ' ')
+            shiftChar = 0;
+          else if (letters[j] == (((String) this.shift).charAt(shiftLoc - 1)))
             // The plaintext will shift this much.
             // Add one becuase array starts counting at 0.
             shiftChar = j + 1;
@@ -76,7 +79,10 @@ public class VigenereCipher extends Cipher {
           shiftLoc++;
         // Get the numerical value of the character
         for (int j = 0; j < letters.length && (shiftAmount == -1); j++) {
-          if (letters[j] == ((String) this.shift).charAt(shiftLoc - 1))
+          // If the current character in the shift is a space, don't shift
+          if ((((String) this.shift).charAt(shiftLoc - 1)) == ' ')
+            shiftAmount = 0;
+          else if (letters[j] == ((String) this.shift).charAt(shiftLoc - 1))
             // Add one, since counting starts at 0
             shiftAmount = j + 1;
         }
@@ -97,7 +103,7 @@ public class VigenereCipher extends Cipher {
         char encodedChar = letters[convertedChar];
         // Add the encoded character to a new string.
         text += encodedChar;
-      } else 
+      } else
         // Add the space
         text += " ";
     }
