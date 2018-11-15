@@ -32,20 +32,25 @@ public class CaesarCipher extends Cipher {
     String text = "";
     // Loop through the input string
     for (int i = 0; i < this.plainText.length(); i++) {
-      // Convert each letter in <input> to its integer form using <letters>
-      int convertedChar = -1;
-      // Get the integer form of the current letter
-      for (int j = 0; j < letters.length && (convertedChar == -1); j++) {
-        if (letters[j] == this.plainText.charAt(i))
-          convertedChar = j;
-      }
-      // Add <shift> to the <convertedChar> and convert it back to the
-      // corresponding letter
-      convertedChar =
-          (convertedChar + Integer.parseInt((String) this.shift)) % 26;
-      char encodedChar = letters[convertedChar];
-      // Add the encoded character to a new string.
-      text += encodedChar;
+      // Skip the char if it is a space.
+      if (this.plainText.charAt(i) != ' ') {
+        // Convert each letter in <input> to its integer form using <letters>
+        int convertedChar = -1;
+        // Get the integer form of the current letter
+        for (int j = 0; j < letters.length && (convertedChar == -1); j++) {
+          if (letters[j] == this.plainText.charAt(i))
+            convertedChar = j;
+        }
+        // Add <shift> to the <convertedChar> and convert it back to the
+        // corresponding letter
+        convertedChar =
+            (convertedChar + Integer.parseInt((String) this.shift)) % 26;
+        char encodedChar = letters[convertedChar];
+        // Add the encoded character to a new string.
+        text += encodedChar;
+      } else
+        // Add a space if a space character was found
+        text += " ";
     }
     this.encodedText = text;
   }
@@ -55,25 +60,30 @@ public class CaesarCipher extends Cipher {
     String text = "";
     // Loop through the input string
     for (int i = 0; i < this.encodedText.length(); i++) {
-      // Convert each letter in <input> to its integer form
-      int convertedChar = -1;
-      for (int k = 0; k < letters.length && (convertedChar == -1); k++) {
-        if (letters[k] == this.encodedText.charAt(i))
-          convertedChar = k;
-      }
-      // Subtract <shift> frome the <convertedChar> to get a number between
-      // 0 and 25 inclusive.
-      convertedChar =
-          (convertedChar - Integer.parseInt((String) this.shift)) % 26;
-      // Check the sign of <convertedChar> is negative
-      if (convertedChar < 0) {
-        // Go backward from the end of the alphabet
-        convertedChar = letters.length + convertedChar;
-      }
-      // and convert it back to a char
-      char decodedChar = letters[convertedChar];
-      // Add the encoded character to a new string.
-      text += decodedChar;
+      // Skip the char if it is a space.
+      if (this.encodedText.charAt(i) != ' ') {
+        // Convert each letter in <input> to its integer form
+        int convertedChar = -1;
+        for (int k = 0; k < letters.length && (convertedChar == -1); k++) {
+          if (letters[k] == this.encodedText.charAt(i))
+            convertedChar = k;
+        }
+        // Subtract <shift> from the <convertedChar> to get a number between
+        // 0 and 25 inclusive.
+        convertedChar =
+            (convertedChar - Integer.parseInt((String) this.shift)) % 26;
+        // Check the sign of <convertedChar> is negative
+        if (convertedChar < 0) {
+          // Go backward from the end of the alphabet
+          convertedChar = letters.length + convertedChar;
+        }
+        // and convert it back to a char
+        char decodedChar = letters[convertedChar];
+        // Add the encoded character to a new string.
+        text += decodedChar;
+      } else
+        // Add a space if a space character was found
+        text += " ";
     }
     this.plainText = text;
   }

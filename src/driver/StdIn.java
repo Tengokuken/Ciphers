@@ -95,7 +95,7 @@ public class StdIn {
         // Check the text.
         case 3:
           // Check that the input consists of strictly alphabets 
-          if (!(input[stage].matches("[A-Za-z]+")))
+          if (!(input[stage].matches("[A-Za-z ]+")))
             result = false;
       }
       return result;
