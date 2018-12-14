@@ -14,7 +14,7 @@ public class StdIn {
   /**
    * Gets the file name from standard input.
    * 
-   * @return fileContents The contents of the text file.
+   * @return cipherDetails Details of the desired cipher.
    */
   public String[] getInput() {
     // Get the input from the user and store them.
@@ -80,7 +80,7 @@ public class StdIn {
           break;
         // Check the shift
         case 2:
-          // Check the cipher. Caesar ciphers use nunber bastly ed shifts,
+          // Check the cipher. Caesar ciphers use nunber based shifts,
           // everything else uses a cipher string.
           if (input[0].equals("caesar") || input[0].equals("Caesar")) {
             // Check that the type contains only numbers
